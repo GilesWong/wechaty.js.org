@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://wechaty.js.org/feed.xml" rel="self" type="application/atom+xml" /><link href="https://wechaty.js.org/" rel="alternate" type="text/html" /><updated>2020-08-21T14:49:00+00:00</updated><id>https://wechaty.js.org/feed.xml</id><title type="html">Wechaty</title><subtitle>Conversational SDK for Chatbot Makers</subtitle><entry><title type="html">基于RPA封装的Wechaty接口下的抖音聊天机器人中期报告</title><link href="https://wechaty.js.org/2020/08/20/wechaty-puppet-douyin-mid-term/" rel="alternate" type="text/html" title="基于RPA封装的Wechaty接口下的抖音聊天机器人中期报告" /><published>2020-08-20T00:00:00+00:00</published><updated>2020-08-20T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/20/wechaty-puppet-douyin-mid-term</id><content type="html" xml:base="https://wechaty.js.org/2020/08/20/wechaty-puppet-douyin-mid-term/">&lt;blockquote&gt;
+  &lt;p&gt;Author: &lt;a href=&quot;https://github.com/gavinwang23&quot;&gt;@gavinwang23&lt;/a&gt;
+Code: &lt;a href=&quot;https://github.com/gavinwang23/douyin-autojs&quot;&gt;@gavinwang23/douyin-autojs&lt;/a&gt;&lt;a href=&quot;https://github.com/gavinwang23/wechaty-puppet-douyin&quot;&gt;@gavinwang23/wechaty-puppet-douyin&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;暑期2020&quot;&gt;暑期2020&lt;/h2&gt;
+
+&lt;p&gt;“开源软件供应链点亮计划-暑期2020”（以下简称 暑期2020）是由中科院软件所与 openEuler 社区共同举办的一项面向高校学生的暑期活动。
+旨在鼓励在校学生积极参与开源软件的开发维护，促进国内优秀开源软件社区的蓬勃发展。
+根据项目的难易程度和完成情况，参与者还可获取“开源软件供应链点亮计划-暑期2020”活动奖金和奖杯。
+官网：&lt;a href=&quot;https://isrc.iscas.ac.cn/summer2020&quot;&gt;https://isrc.iscas.ac.cn/summer2020&lt;/a&gt; 官方新闻：&lt;a href=&quot;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&quot;&gt;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&lt;/a&gt;
+本项目 [基于开放 API 封装 Wechaty 接口下的钉钉聊天机器人] 系 暑期2020 支持的开源项目。&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;基于开放-api-封装-wechaty-接口下的钉钉聊天机器人中期报告&quot;&gt;[基于开放 API 封装 Wechaty 接口下的钉钉聊天机器人]中期报告&lt;/h2&gt;
+
+&lt;h2 id=&quot;项目信息&quot;&gt;项目信息&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目名称：基于 RPA 封装 Wechaty 接口下的抖音聊天机器人&lt;/li&gt;
+  &lt;li&gt;方案描述：服务器架设安卓虚拟机，通过autojs操作抖音，类似wechaty的puppeteer操作Chrome的网页微信，通过socket与wechaty连接&lt;/li&gt;
+  &lt;li&gt;时间规划：7.19-8.15完成各种方案的尝试和探索，8.15-9.15完成puppet的各种接口接入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目进度&quot;&gt;项目进度&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;已完成工作：
+    &lt;ul&gt;
+      &lt;li&gt;熟悉了wechaty的使用的操作方法&lt;/li&gt;
+      &lt;li&gt;探索了各种方案：
+        &lt;ul&gt;
+          &lt;li&gt;抖音的发送私信的openapi需要用户为企业用户，只有企业抖音号api才有效&lt;/li&gt;
+          &lt;li&gt;探索了monkeyDEV和IDA逆向私信协议的方法&lt;/li&gt;
+          &lt;li&gt;没有找到chrome跑安卓app的方法，或者方法失效&lt;/li&gt;
+          &lt;li&gt;尝试了通过安卓和ios端抓包的方式获取抖音的私信方法，结果抓不到私信的消息&lt;/li&gt;
+          &lt;li&gt;autojs控制安卓app的方法，现在正在采用，也是现在唯一可运行的方法，目前完成了抖音基本操作方法的封装和socket的通信&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;抖音的autojs控制版本完成了自动登录，消息监听，发送消息等方法&lt;/li&gt;
+      &lt;li&gt;用socket和autojs的方法跑了一个简易dingdongbot，&lt;a href=&quot;https://youtu.be/TY4hn9TIWlA&quot;&gt;视频演示地址&lt;/a&gt;（youtube）&lt;/li&gt;
+      &lt;li&gt;puppet开发中，初步成型&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;遇到的问题及解决方案：
+    &lt;ul&gt;
+      &lt;li&gt;遇到问题
+        &lt;ul&gt;
+          &lt;li&gt;抖音的app控件id命名很随机，为三位随机的字母和数字，不同版本的控件名称不一样&lt;/li&gt;
+          &lt;li&gt;首次抖音登录还需要图片验证，这个暂时没想到方法，只能人工验证，第二次登录就可以自动化了&lt;/li&gt;
+          &lt;li&gt;监听消息的问题，只能打开消息窗口才能获取到消息，这样多人发送多条消息时只能读取一个人&lt;/li&gt;
+          &lt;li&gt;eslist语法检查经常报错&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;解决方案
+        &lt;ul&gt;
+          &lt;li&gt;使用统一版本的抖音app&lt;/li&gt;
+          &lt;li&gt;首次登录手动登录一下&lt;/li&gt;
+          &lt;li&gt;退出消息窗口时继续查找未读消息，并且通过通过未读消息上带数字的小圆点判断有n条未读消息，打开未读消息的窗口，遍历屏幕上的消息框，将倒数n条消息存入数组，传到客户端&lt;/li&gt;
+          &lt;li&gt;按照语法格式来&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;后续工作安排：
+    &lt;ul&gt;
+      &lt;li&gt;继续改善和封装autojs的代码，美化和规范代码&lt;/li&gt;
+      &lt;li&gt;继续开发puppet，将现有socket客户端移植到puppet，接入wechaty完成一个dingdongbot&lt;/li&gt;
+      &lt;li&gt;探索puppet更多的功能，实现底层autojs&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;PPT:&lt;/p&gt;
+    &lt;iframe src=&quot;https://youtu.be/zDIPzGztn_E&quot; width=&quot;560&quot; height=&quot;315&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot; style=&quot; position: absolute; top:0; left:0; width:100%; height:100%; &quot;&gt;&lt;/iframe&gt;
+
+    &lt;p&gt;live code:&lt;/p&gt;
+    &lt;iframe src=&quot;https://youtu.be/UWio2whtoeA&quot; width=&quot;560&quot; height=&quot;315&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot; style=&quot; position: absolute; top:0; left:0; width:100%; height:100%; &quot;&gt;&lt;/iframe&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>wangjunwei</name></author><category term="project" /><category term="douyin" /><summary type="html">Author: @gavinwang23 Code: @gavinwang23/douyin-autojs@gavinwang23/wechaty-puppet-douyin</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/wechaty-puppet-douyin/wechaty-puppet-douyin-logo.jpg" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/wechaty-puppet-douyin/wechaty-puppet-douyin-logo.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">暑期2020 基于开放 API 封装 Wechaty 接口下的企业微信聊天机器人 计划书</title><link href="https://wechaty.js.org/2020/08/19/puppet-work-plan/" rel="alternate" type="text/html" title="暑期2020 基于开放 API 封装 Wechaty 接口下的企业微信聊天机器人 计划书" /><published>2020-08-19T00:00:00+00:00</published><updated>2020-08-19T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/19/puppet-work-plan</id><content type="html" xml:base="https://wechaty.js.org/2020/08/19/puppet-work-plan/">&lt;!-- markdownlint-disable --&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Author: &lt;a href=&quot;https://github.com/Sapio-S&quot;&gt;@Sapio-S&lt;/a&gt; Learning &amp;amp; practicing.
+Code: &lt;a href=&quot;https://github.com/Sapio-S/wechaty-puppet-official&quot;&gt;@code&lt;/a&gt;
+##简介
+本项目计划针对企业微信平台开发一个puppet，让 Wechaty 开发者可以仅仅通过改变一个变量，就能够切换使用企业微信的功能。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;暑期2020-基于开放-api-封装-wechaty-接口下的企业微信聊天机器人-计划书&quot;&gt;暑期2020 基于开放 API 封装 Wechaty 接口下的企业微信聊天机器人 计划书&lt;/h1&gt;
+
+&lt;h2 id=&quot;暑期2020&quot;&gt;暑期2020&lt;/h2&gt;
+&lt;p&gt;“开源软件供应链点亮计划-暑期2020”（以下简称 暑期2020）是由中科院软件所与 openEuler 社区共同举办的一项面向高校学生的暑期活动。
+旨在鼓励在校学生积极参与开源软件的开发维护，促进国内优秀开源软件社区的蓬勃发展。
+根据项目的难易程度和完成情况，参与者还可获取“开源软件供应链点亮计划-暑期2020”活动奖金和奖杯。
+官网：https://isrc.iscas.ac.cn/summer2020 官方新闻：http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html
+本项目 [基于开放 API 封装 Wechaty 接口下的企业微信聊天机器人] 系 暑期2020 支持的开源项目。&lt;/p&gt;
+
+&lt;h2 id=&quot;基于开放-api-封装-wechaty-接口下的企业微信聊天机器人具体计划&quot;&gt;[基于开放 API 封装 Wechaty 接口下的企业微信聊天机器人]具体计划&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;导师：高原&lt;/li&gt;
+  &lt;li&gt;学生：谢昱清&lt;/li&gt;
+  &lt;li&gt;模块列表
+    &lt;ul&gt;
+      &lt;li&gt;设计配置参数&lt;/li&gt;
+      &lt;li&gt;接入企业微信会话存档接口读取消息&lt;/li&gt;
+      &lt;li&gt;实现 puppet 上各个类型的消息接口&lt;/li&gt;
+      &lt;li&gt;定时读取消息，并在读取消息之后触发消息事件&lt;/li&gt;
+      &lt;li&gt;企业微信会话存档 puppet 的使用文档&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;计划安排：
+    &lt;ul&gt;
+      &lt;li&gt;准备工作
+        &lt;ul&gt;
+          &lt;li&gt;2020.7.1 - 2020.7.19&lt;/li&gt;
+          &lt;li&gt;掌握相关技术栈（typescript等），了解puppet构造。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;与企业微信建立连接，完成node.js到企业微信的信息通路
+        &lt;ul&gt;
+          &lt;li&gt;2020.7.20 - 2020.8.5&lt;/li&gt;
+          &lt;li&gt;包括对话的加密解密，相关环境配置，node.js与微信SDK的交互。完成node.js进行企业微信消息拉取的demo。&lt;/li&gt;
+          &lt;li&gt;注：原计划于2020.7.26完成，但是由于对预期成果理解有误，进展方向出现了偏差，延期一星期。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;实现 puppet 上各个类型的消息接口
+        &lt;ul&gt;
+          &lt;li&gt;2020.8.6 - 2020.8.30&lt;/li&gt;
+          &lt;li&gt;正式开发puppet。完成状态函数，消息的读取及消息的存储等内容。可能需要拓展原本puppet的数据结构。其中第一周完成逻辑设计及基本的消息拉取。&lt;/li&gt;
+          &lt;li&gt;注：企业微信puppet仅负责拉取消息，不必完成完整的交互过程，因此可能需要单独设计对应的bot进行测试。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;定时读取消息，并在读取消息之后触发消息事件
+        &lt;ul&gt;
+          &lt;li&gt;2020.8.31 - 2020.9.13&lt;/li&gt;
+          &lt;li&gt;完成企业微信puppet的所有所需功能，进行收尾工作。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;企业微信会话存档 puppet 的使用文档
+        &lt;ul&gt;
+          &lt;li&gt;2020.9.14 - 2020.9.20&lt;/li&gt;
+          &lt;li&gt;在原有的文档上，增加企业微信puppet相关的内容。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;项目链接：https://github.com/Sapio-S/wechaty-puppet-official/&lt;/li&gt;
+  &lt;li&gt;联系方式：1205402283@mail.qq.com&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>sapio-s</name></author><category term="project" /><category term="featured" /><category term="Soc2020" /><category term="Wechat Work" /><summary type="html">Author: @Sapio-S Learning &amp;amp; practicing. Code: @code ##简介 本项目计划针对企业微信平台开发一个puppet，让 Wechaty 开发者可以仅仅通过改变一个变量，就能够切换使用企业微信的功能。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/work-puppet/pic.jpg" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/work-puppet/pic.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">阿滋纳莫曲线</title><link href="https://wechaty.js.org/2020/08/19/wechaty-zizz-gcaufy/" rel="alternate" type="text/html" title="阿滋纳莫曲线" /><published>2020-08-19T00:00:00+00:00</published><updated>2020-08-19T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/19/wechaty-zizz-gcaufy</id><content type="html" xml:base="https://wechaty.js.org/2020/08/19/wechaty-zizz-gcaufy/">&lt;blockquote&gt;
+  &lt;p&gt;这个是 阿滋纳莫曲线
+— &lt;a href=&quot;/developers/gcaufy/&quot;&gt;@Gcaufy&lt;/a&gt;, Creator of &lt;a href=&quot;https://github.com/tencent/wepy&quot;&gt;WePY&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/08-zizz/zizz-discussion.jpg&quot; alt=&quot;Gcaufy Wechaty zizz&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;/developers/chs97&quot;&gt;@陈汉森&lt;/a&gt;: 这个波形有特殊含义吗？&lt;br /&gt;
+&lt;a href=&quot;/developers/xajeyu/&quot;&gt;@xajeyu&lt;/a&gt;: 机器人。滋滋滋&lt;br /&gt;
+&lt;a href=&quot;/developers/huan/&quot;&gt;@Huan&lt;/a&gt;: Zizz…zzz!&lt;br /&gt;
+&lt;a href=&quot;/developers/gcaufy/&quot;&gt;@Gcaufy&lt;/a&gt;: 这个是 阿滋纳莫曲线&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>huan</name></author><category term="fun" /><category term="fun" /><summary type="html">这个是 阿滋纳莫曲线 — @Gcaufy, Creator of WePY</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/08-zizz/zizz.png" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/08-zizz/zizz.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">SpringBoot搭建wechaty智能聊天机器</title><link href="https://wechaty.js.org/2020/08/17/java-wechaty-bot/" rel="alternate" type="text/html" title="SpringBoot搭建wechaty智能聊天机器" /><published>2020-08-17T00:00:00+00:00</published><updated>2020-08-17T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/17/java-wechaty-bot</id><content type="html" xml:base="https://wechaty.js.org/2020/08/17/java-wechaty-bot/">&lt;blockquote&gt;
+  &lt;p&gt;作者: &lt;a href=&quot;https://github.com/smwsk/&quot;&gt;smwsk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;摘要&quot;&gt;摘要&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本项目是基础wechaty项目实现微信的聊天功能、通过微信对话开放平台提供的API进行智能的应答、实现了微信的智能聊天、最后非常感谢wechaty的无私奉献。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;智能机器人功能&quot;&gt;智能机器人功能&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;高级转人工&lt;/li&gt;
+  &lt;li&gt;周边生活服务&lt;/li&gt;
+  &lt;li&gt;聊聊电影&lt;/li&gt;
+  &lt;li&gt;讲笑话&lt;/li&gt;
+  &lt;li&gt;成语接龙&lt;/li&gt;
+  &lt;li&gt;天气查询&lt;/li&gt;
+  &lt;li&gt;AI时光机&lt;/li&gt;
+  &lt;li&gt;心里年龄测试&lt;/li&gt;
+  &lt;li&gt;中英互译功能&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;微信机器人头像&quot;&gt;微信机器人头像&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/smwsk-java-wechaty-bot/code.jpg&quot; alt=&quot;微信二维码&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;准备工作&quot;&gt;准备工作&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要先准备一台token网关服务器&lt;/li&gt;
+  &lt;li&gt;跟wechaty人员申请token&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openai.weixin.qq.com/&quot;&gt;微信对话开放平台&lt;/a&gt; 申请一个机器人、学习技能、获取TOKEN&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目信息&quot;&gt;项目信息&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/smwsk/wechaty-bot&quot;&gt;项目地址&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目成果&quot;&gt;项目成果&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/smwsk-java-wechaty-bot/results-1.jpg&quot; width=&quot;300&quot; alt=&quot;讲笑话-听歌&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/smwsk-java-wechaty-bot/results-2.jpg&quot; width=&quot;300&quot; alt=&quot;新闻-成语接龙&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/smwsk-java-wechaty-bot/results-3.jpg&quot; width=&quot;300&quot; alt=&quot;心理年龄测试&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;待完善功能&quot;&gt;待完善功能&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TODO 根据群里的每个人回答对象@响应对应的群友&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目研究血泪史&quot;&gt;项目研究血泪史&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本人英语不是很好，对于一个都是英文文档的项目看的简直是头疼、但是还是能看的懂一点点、我们从&lt;a href=&quot;https://github.com/wechaty/wechaty&quot;&gt;wechaty&lt;/a&gt;项目中得知,我们用到ipad协议的话，需要一个token、然后找到了客户拿到了token。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;客服发的材料&quot;&gt;客服发的材料&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;puppet_padplus_xxxxx 有效期2020-08-25&lt;/li&gt;
+  &lt;li&gt;请务必反复阅读我们的Wiki，Wechaty 的 API 中英文文档、各个项目链接、多个协议的使用说明、Web协议不能使用情况下如何申请其他协议Token等内容均在其中：&lt;a href=&quot;https://github.com/juzibot/Welcome/wiki/Everything-about-Wechaty&quot;&gt;https://github.com/juzibot/Welcome/wiki/Everything-about-Wechaty&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;API文档：&lt;a href=&quot;https://wechaty.js.org/api&quot;&gt;https://wechaty.js.org/api&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Padplus Token 进行多语言开发指南&lt;a href=&quot;https://github.com/wechaty/wechaty/issues/1985&quot;&gt;https://github.com/wechaty/wechaty/issues/1985&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我看到多语言版本有JAVA版本，马上就下载下来试一下能不能运行。没有详细看后面的文档、这导致我把&lt;a href=&quot;https://github.com/wechaty/java-wechaty-getting-started&quot;&gt;JAVA版本Demo&lt;/a&gt;下载下来一直运行不起来、后面仔细看了文档之后才知道需要部署一个网关服务、而且要在公网的服务器上面、希望后面的开发不要走我这个弯路、好好查看文档。&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>smwsk</name></author><category term="project" /><category term="wechaty" /><category term="SpringBoot" /><category term="Java" /><category term="微信对话开发平台" /><summary type="html">作者: smwsk</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/smwsk-java-wechaty-bot/home.jpg" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/smwsk-java-wechaty-bot/home.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">暑期2020 [编写一个“每日一句”插件] POC 成果展示</title><link href="https://wechaty.js.org/2020/08/15/wechaty-words-per-day-plugin-mid-term/" rel="alternate" type="text/html" title="暑期2020 [编写一个“每日一句”插件] POC 成果展示" /><published>2020-08-15T00:00:00+00:00</published><updated>2020-08-15T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/15/wechaty-words-per-day-plugin-mid-term</id><content type="html" xml:base="https://wechaty.js.org/2020/08/15/wechaty-words-per-day-plugin-mid-term/">&lt;blockquote&gt;
+  &lt;p&gt;作者: &lt;a href=&quot;https://github.com/univerone/&quot;&gt;univerone&lt;/a&gt;
+Github Repo: &lt;a href=&quot;https://github.com/univerone/words-per-day&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;暑期2020&quot;&gt;暑期2020&lt;/h2&gt;
+
+&lt;p&gt;“开源软件供应链点亮计划-暑期2020”（以下简称 暑期2020）是由中科院软件所与 openEuler 社区共同举办的一项面向高校学生的暑期活动。
+旨在鼓励在校学生积极参与开源软件的开发维护，促进国内优秀开源软件社区的蓬勃发展。
+根据项目的难易程度和完成情况，参与者还可获取“开源软件供应链点亮计划-暑期2020”活动奖金和奖杯。&lt;/p&gt;
+
+&lt;p&gt;官网：&lt;a href=&quot;https://isrc.iscas.ac.cn/summer2020&quot;&gt;https://isrc.iscas.ac.cn/summer2020&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;官方新闻：&lt;a href=&quot;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&quot;&gt;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;本项目 [编写一个“每日一句”插件] 系 暑期2020 支持的开源项目。&lt;/p&gt;
+
+&lt;h2 id=&quot;编写一个每日一句插件信息&quot;&gt;[编写一个“每日一句”插件]信息&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;导师：Gcaufy&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;学生：江姗姗&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目名称：编写一个“每日一句”插件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;方案描述：
+    &lt;ul&gt;
+      &lt;li&gt;制作可以被wechaty调用的插件，能够使用用户自定义的每日一句语料&lt;/li&gt;
+      &lt;li&gt;插件能够构造POST和GET请求，设置请求参数，并根据指定的解析规则解析返回的json格式或者html格式的内容&lt;/li&gt;
+      &lt;li&gt;插件可以根据请求结构中的图片地址下载图片，并根据每日一句内容以及微信群的相关信息添加水印&lt;/li&gt;
+      &lt;li&gt;插件能够设置定时发送的时间、群名、发送的内容&lt;/li&gt;
+      &lt;li&gt;根据群名推荐每日一句的发送内容（候选）&lt;/li&gt;
+      &lt;li&gt;能够调用该插件使用自定义的api接口（候选）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;时间规划：
+    &lt;ul&gt;
+      &lt;li&gt;开发插件的基本框架
+        &lt;ul&gt;
+          &lt;li&gt;7/1 - 7/21&lt;/li&gt;
+          &lt;li&gt;插件的输入参数有：使用的内置API接口名称、应用的群聊名称以及发布每日一句内容的时间，完成基本代码构建。插件能够设置定时发送的时间、群名、发送的内容，也可以根据请求结构中的图片地址下载图片，并根据每日一句内容以及微信群的相关信息添加水印。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;发布NPM包，引入CI/CD
+        &lt;ul&gt;
+          &lt;li&gt;7/22 - 8/14&lt;/li&gt;
+          &lt;li&gt;进一步优化代码以及注释，引入CI/CD来进行代码质量控制以及包的版本管理&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;丰富语料库
+        &lt;ul&gt;
+          &lt;li&gt;8/15 - 9/07&lt;/li&gt;
+          &lt;li&gt;首先确定使用的API接口或者爬取的网址，根据不同的网址进行不同的解析，返回指定的结果。构造请求并解析内容，返回需要的字符串（每日一句的内容或者图片的URL）。如有余力的话，能够支持用户自主设定语料的来源。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;进行测试完善项目文档
+        &lt;ul&gt;
+          &lt;li&gt;9/07 - 10/01&lt;/li&gt;
+          &lt;li&gt;完善项目文档，撰写整个项目过程的总结文章;增加单元测试等;计划延迟的缓冲时间&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目进度&quot;&gt;项目进度&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;已完成工作：
+    &lt;ul&gt;
+      &lt;li&gt;07/01 - 07/18
+        &lt;ul&gt;
+          &lt;li&gt;完成了插件的基本框架&lt;/li&gt;
+          &lt;li&gt;实现了往指定群聊定时发送消息、根据关键词生成打卡图片的基本功能&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;07/19 - 07/26
+        &lt;ul&gt;
+          &lt;li&gt;发布成NPM包，使用github action进行自动构建和版本更新&lt;/li&gt;
+          &lt;li&gt;优化项目结构&lt;/li&gt;
+          &lt;li&gt;统一注释风格为JSdoc&lt;/li&gt;
+          &lt;li&gt;优化代码&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;07/27 - 08/02
+        &lt;ul&gt;
+          &lt;li&gt;支持用户使用3种方式(jsonpath选择器、css选择器以及正则表达式)以及固定的网址自定义数据源&lt;/li&gt;
+          &lt;li&gt;生成的图片输出为base64字符串&lt;/li&gt;
+          &lt;li&gt;使用try…catch来进行await, promise 的异常捕捉&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;08/03 - 08/15
+        &lt;ul&gt;
+          &lt;li&gt;进一步抽象数据抓取模块，支持使用用户自定义的数据抓取函数。能够解析每日一句信息中的图片信息，并以图片的形式发送。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;遇到的问题及解决方案：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;在编写这个插件的过程中，有很多需要等待一定时间来完成的步骤，比如图片的下载保存等，这些过程是异步执行的，如果想在这个过程结束后进行下一个过程使用它的结果，可以使用回调函数，但是可读性比较差，因此最终改用Promise以及Async/Await进行处理。&lt;/li&gt;
+      &lt;li&gt;图像处理使用了npm的gm包，相关文档不够详细因此在处理图像的过程中花费较多时间达到想要的效果。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;后续工作安排：
+    &lt;ul&gt;
+      &lt;li&gt;完善项目文档&lt;/li&gt;
+      &lt;li&gt;撰写项目的测试代码&lt;/li&gt;
+      &lt;li&gt;撰写整个项目过程的总结文章&lt;/li&gt;
+      &lt;li&gt;完善差错处理模块&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;联系我们&quot;&gt;联系我们&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目链接：&lt;a href=&quot;https://github.com/univerone/words-per-day&quot;&gt;https://github.com/univerone/words-per-day&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;联系方式：univeroneie(at)outlook.com&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;wechaty-demo-day-视频&quot;&gt;Wechaty Demo Day 视频&lt;/h2&gt;
+
+&lt;h3 id=&quot;ppt展示视频&quot;&gt;PPT展示视频&lt;/h3&gt;
+
+&lt;div style=&quot;
+    position: relative;
+    padding-bottom: 70%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+&quot;&gt;
+  &lt;iframe src=&quot;https://player.bilibili.com/player.html?bvid=BV1vT4y157x5&quot; allowfullscreen=&quot;&quot; webkitallowfullscreen=&quot;&quot; frameborder=&quot;0&quot; style=&quot;
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    &quot;&gt;
+&lt;/iframe&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&quot;ppt&quot;&gt;PPT&lt;/h3&gt;
+
+&lt;div style=&quot;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+&quot;&gt;
+  &lt;iframe src=&quot;/assets/js/viewer-js/#/assets/2020/wechaty-words-per-day-plugin-mid-term/presentation.pdf&quot; allowfullscreen=&quot;&quot; webkitallowfullscreen=&quot;&quot; frameborder=&quot;0&quot; style=&quot;
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    &quot;&gt;
+&lt;/iframe&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&quot;live-code视频&quot;&gt;Live Code视频&lt;/h3&gt;
+
+&lt;div style=&quot;
+    position: relative;
+    padding-bottom: 70%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+&quot;&gt;
+  &lt;iframe src=&quot;https://player.bilibili.com/player.html?bvid=BV1ih411d75h&quot; allowfullscreen=&quot;&quot; webkitallowfullscreen=&quot;&quot; frameborder=&quot;0&quot; style=&quot;
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    &quot;&gt;
+&lt;/iframe&gt;
+
+&lt;/div&gt;</content><author><name>univerone</name></author><category term="project" /><category term="wechaty" /><category term="plugins" /><category term="soc" /><summary type="html">作者: univerone Github Repo: Github</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/wechaty-words-per-day-plugin-mid-term/header.png" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/wechaty-words-per-day-plugin-mid-term/header.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">暑期2020 [基于python-wechaty的群聊助手机器人] POC 成果展示</title><link href="https://wechaty.js.org/2020/08/14/python-wechaty-groupchat-assistant-bot-poc/" rel="alternate" type="text/html" title="暑期2020 [基于python-wechaty的群聊助手机器人] POC 成果展示" /><published>2020-08-14T13:30:00+00:00</published><updated>2020-08-14T13:30:00+00:00</updated><id>https://wechaty.js.org/2020/08/14/python-wechaty-groupchat-assistant-bot-poc</id><content type="html" xml:base="https://wechaty.js.org/2020/08/14/python-wechaty-groupchat-assistant-bot-poc/">&lt;blockquote&gt;
+  &lt;p&gt;Author: &lt;a href=&quot;https://github.com/kxz18&quot;&gt;@kxz18&lt;/a&gt;
+Code: &lt;a href=&quot;https://github.com/kxz18/python-wechaty-groupchat-bot&quot;&gt;@kxz18/python-wechaty-groupchat-bot&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;暑期2020&quot;&gt;暑期2020&lt;/h2&gt;
+
+&lt;p&gt;“开源软件供应链点亮计划-暑期2020”（以下简称 暑期2020）是由中科院软件所与 openEuler 社区共同举办的一项面向高校学生的暑期活动。
+旨在鼓励在校学生积极参与开源软件的开发维护，促进国内优秀开源软件社区的蓬勃发展。
+根据项目的难易程度和完成情况，参与者还可获取“开源软件供应链点亮计划-暑期2020”活动奖金和奖杯。
+官网：&lt;a href=&quot;https://isrc.iscas.ac.cn/summer2020&quot;&gt;https://isrc.iscas.ac.cn/summer2020&lt;/a&gt; 官方新闻：&lt;a href=&quot;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&quot;&gt;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&lt;/a&gt;
+本项目 [项目名称] 系 暑期2020 支持的开源项目。&lt;/p&gt;
+
+&lt;h2 id=&quot;基于python-wechaty的群聊助手机器人信息&quot;&gt;[基于python-wechaty的群聊助手机器人]信息&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;导师：吴京京&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;学生：孔祥哲&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目名称：基于python-wechaty的群聊助手机器人&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;方案描述：&lt;/p&gt;
+
+    &lt;p&gt;本项目需要基于python-wechaty实现一个群聊助手机器人。该机器人主要由四个插件组成。第一个插件是群聊消息打标插件，通过群成员引用重要消息回复机器人的方式记录重要信息，以便之后以问答的方式进行查找。在基本功能开发完成之后将用深度学习的方法优化问答的容错性，从而提升交互水平。第二个插件是定时消息插件，用于定时消息的发放。第三个插件是群成员的管理插件，当有新人进群时进行欢迎，当一定人数群成员对某位群成员言行表示不适时自动从群聊中删除该位群成员。第四个插件用于提升交互，为帮助系统插件，提供自定义的功能文档，辅助前三个插件工作。四个插件中第一个插件是项目的基本要求。&lt;/p&gt;
+
+    &lt;p&gt;项目主要分为四个阶段进行。第一阶段是基本功能的实现，也就是群聊消息打标插件的实现。第二阶段是扩展功能的实现，主要实现定时消息插件和群成员的管理插件。第三阶段优化交互性能，实现帮助系统插件，利用深度学习对消息打标插件的问答系统进行优化。最后是选做阶段，在项目计划完成后如果还有时间，进行rasa聊天机器人api的对接，丰富插件功能。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;时间规划:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;群聊消息打标插件
+        &lt;ul&gt;
+          &lt;li&gt;7.1 - 7.19&lt;/li&gt;
+          &lt;li&gt;该模块为本项目的基本要求，需要实现通过引用消息进行回复对重要的群聊消息进行打标，并存入本地的数据库。在对应问题被提出时机器人能通过搜索存储的打标消息给出相应的回答，如果匹配的答案置信度不高，则提供可能的关键词向用户进行确认。同时支持展示全部或一定时间段内的打标消息，用户可以对其中的消息进行手动删除或定时删除，打标消息本身也可以提供有效期参数，在过了有效期后自动删除。后期提供帮助系统，用户可随时查看不同功能的帮助信息。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;基本功能&lt;/li&gt;
+      &lt;li&gt;定时消息插件
+        &lt;ul&gt;
+          &lt;li&gt;7.20 - 7.26&lt;/li&gt;
+          &lt;li&gt;用户指定消息内容和发送时间，由机器人定时发出消息。&lt;/li&gt;
+          &lt;li&gt;扩展功能&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;群成员管理插件
+        &lt;ul&gt;
+          &lt;li&gt;7.27 - 8.2&lt;/li&gt;
+          &lt;li&gt;进行踢人和进群欢迎的管理，踢人要求3位以上群成员对某人表示不满（群成员总共只有3人以下或4人时分别需要1人和2人表示不满）。此插件需要机器人拥有相关的权限。&lt;/li&gt;
+          &lt;li&gt;扩展功能&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;对前几个模块的交互方面进行提升
+        &lt;ul&gt;
+          &lt;li&gt;8.3 - 8.23&lt;/li&gt;
+          &lt;li&gt;对交互方面进行统一优化，提高解析用户命令时的容错性，目前已有的想法是尝试用深度学习方法对问答系统的匹配准确性进行提升（在基础版本中使用 cosine 相似度对问题和答案进行匹配）、在用户命令解析失败但和某些模式很相近时进行确认等。同时该过程中会不断模拟用户场景发现机器人在交互上不够人性化的地方并进行修正。&lt;/li&gt;
+          &lt;li&gt;扩展功能&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;（选做）rasa chat bot 插件
+        &lt;ul&gt;
+          &lt;li&gt;8.24 - 8.31&lt;/li&gt;
+          &lt;li&gt;接入rasa chat bot 的API，此为选做内容，如果在以上内容都完成且仍有较充裕的时间的情况下，可以考虑尝试进行制作。&lt;/li&gt;
+          &lt;li&gt;选做内容&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目进度&quot;&gt;项目进度&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;已完成工作：
+目前已经完成四个插件的开发以及对应的单元测试。即项目的前两个阶段已经完成，第三阶段完成一部分，正在进行中。&lt;/p&gt;
+
+    &lt;p&gt;目前已经制作了presentation对项目的功能和结构做简单讲解:&lt;/p&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/WlxClO3C_Sc&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+    &lt;p&gt;对已经实现的功能也进行了live coding演示，演示内容见：&lt;/p&gt;
+
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/TcsK58aokUA&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;遇到的问题及解决方案：&lt;/p&gt;
+
+    &lt;p&gt;在开发过程中主要遇到的是两类问题，一类是技术问题，另一类是对软件架构的选择。&lt;/p&gt;
+
+    &lt;p&gt;技术方面的问题主要在于对第三方库不熟悉。例如在开发过程中对python-wechaty接口不熟悉，无法快速准确拿到想要的信息，以及使用apscheduler时不知如何用async的函数作为回调函数。由于python-wechaty目前还处于开发阶段，文档还不完善，因此遇到问题主要直接参考github上的代码，沿着相关的类和函数向上追溯看代码解决问题，实在解决不了或者无法确定解决方法是否正确的会直接向导师咨询。而像apscheduler这类第三方库有较为完善的文档，因此直接从文档中寻求答案。也有一些多线程方面的问题，例如因修改数据库后一直保留与数据库的连接而产生的多线程访问问题（把与数据库的连接从主线程传到了子线程中），这类就会直接上网搜索比较模板的写法来解决。还有一个问题是接入微信进行测试需要一个微信号，刚开始进行测试的时候总是容易被腾讯封锁，在与导师交流后养了很久的帐号（模拟人类行为），最后才能用来挂机器人测试。&lt;/p&gt;
+
+    &lt;p&gt;而在软件架构选择方面，由于自己软件架构的经验不多，所以会先以自己已有的知识设计一些架构，然后和导师交流这样的架构是否合理，请他给出一些建议。对于一些比较常见的架构问题，我也会自己搜索一下传统的架构模式进行模仿。&lt;/p&gt;
+
+    &lt;p&gt;总的来说，问题大多都是可以解决的，一般从文档、github issue、代码本身、各类论坛和博客中总能找到解决方法。同时也要多和导师交流，导师的经验比较丰富，对很多问题都能给出比较高效的解答，多和导师交流不仅能把问题解决，也能学到很多新的东西。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;后续工作安排：
+后续工作在路线上与之前计划的一致，同时由于前面的任务完成日期比预期提早，因此整体计划可以前移。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;联系我们&quot;&gt;联系我们&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目链接：&lt;a href=&quot;https://github.com/kxz18/python-wechaty-groupchat-bot&quot;&gt;https://github.com/kxz18/python-wechaty-groupchat-bot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;联系方式：+86 15068701650&lt;/td&gt;
+          &lt;td&gt;e: 15068701650@163.com&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;导师评审&quot;&gt;导师评审&lt;/h2&gt;
+
+&lt;h3 id=&quot;评审对象&quot;&gt;评审对象&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;评审内容：&lt;em&gt;中期报告&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;提交人：&lt;em&gt;孔祥哲&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;评审结果&quot;&gt;评审结果&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目完成度：&lt;em&gt;孔祥哲根据原定项目需求，迅速完成大部分功能，切代码质量非常好。期间与我保持着密切的联系，主动咨询问题，解决项目中的各种难题。目前项目已进入尾声，剩下项目的附加扩展功能开发以及部分代码测试的工作。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;学生参与度：&lt;em&gt;孔祥哲同学自项目开始之期就开始高效率的开发，每天都有足够的代码提交量，积极完成项目功能，且能够精准的剖析出项目中存在的各种问题，基本上全程都由该同学在主导，我只是来解决他所提出的问题。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;代码贡献量：&lt;em&gt;该同学承担着该项目的主要工作，包括需求深度分析，模块开发和扩展模块的讨论，我主要承担着一个指导的作用，解决该同学提出的部分问题。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;综合评价及建议：&lt;em&gt;该同学的编程能力，对业务的分析能力都非常好，期间能够快速精准的发现主要问题，加快项目的开发速度，是一个十分优秀的实践者。由于该学生在过程中表现出的高效率，暂无其他建议，希望该同学能够继续按照自己的兴趣，继续学习，期待你以后的高光时刻。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;最终评审结果：“通过”&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>kxz</name></author><category term="project" /><category term="python" /><category term="soc2020" /><summary type="html">Author: @kxz18 Code: @kxz18/python-wechaty-groupchat-bot</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/groupchat-assistant-bot-poc/header.png" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/groupchat-assistant-bot-poc/header.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">基于Python-wechaty建立一个斗图机器人 POC 成果展示</title><link href="https://wechaty.js.org/2020/08/13/python-wechaty-meme-bot-mid-term/" rel="alternate" type="text/html" title="基于Python-wechaty建立一个斗图机器人 POC 成果展示" /><published>2020-08-13T00:00:00+00:00</published><updated>2020-08-13T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/13/python-wechaty-meme-bot-mid-term</id><content type="html" xml:base="https://wechaty.js.org/2020/08/13/python-wechaty-meme-bot-mid-term/">&lt;blockquote&gt;
+  &lt;p&gt;Author: &lt;a href=&quot;https://github.com/MrZilinXiao&quot;&gt;@MrZilinXiao&lt;/a&gt; Always dedicated to learn something brand new.
+Code: &lt;a href=&quot;https://github.com/MrZilinXiao/python-wechaty-meme-bot/&quot;&gt;@python-wechaty-meme-bot&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;暑期2020-基于python-wechaty建立一个斗图机器人-poc-成果展示&quot;&gt;暑期2020 基于Python-wechaty建立一个斗图机器人 POC 成果展示&lt;/h2&gt;
+
+&lt;p&gt;“开源软件供应链点亮计划-暑期2020”（以下简称 暑期2020）是由中科院软件所与 openEuler 社区共同举办的一项面向高校学生的暑期活动。
+旨在鼓励在校学生积极参与开源软件的开发维护，促进国内优秀开源软件社区的蓬勃发展。
+根据项目的难易程度和完成情况，参与者还可获取“开源软件供应链点亮计划-暑期2020”活动奖金和奖杯。
+官网：&lt;a href=&quot;https://isrc.iscas.ac.cn/summer2020&quot;&gt;https://isrc.iscas.ac.cn/summer2020&lt;/a&gt; 官方新闻：&lt;a href=&quot;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&quot;&gt;http://www.iscas.ac.cn/xshd2016/xshy2016/202004/t20200426_5563484.html&lt;/a&gt;
+本项目 基于Python-wechaty建立一个斗图机器人 系 暑期2020 支持的开源项目。&lt;/p&gt;
+
+&lt;h2 id=&quot;基于python-wechaty建立一个斗图机器人信息&quot;&gt;[基于Python-wechaty建立一个斗图机器人]信息&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;导师：黄纯洪&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;学生：肖子霖&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目名称：基于Python-wechaty建立一个斗图机器人&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;方案描述：利用OCR、NLP等技术，提取出用户发送的表情包内容，并回复数据库中已有与之相关的表情；具体技术方案泳道图见下：&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/2020/meme-bot/08-13-wechaty-meme-bot-mid-term.png&quot; alt=&quot;mid-term&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;更多细节可参见&lt;a href=&quot;https://github.com/MrZilinXiao/python-wechaty-meme-bot/blob/master/README.md&quot;&gt;项目README&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;时间规划（摘自项目申请书）：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Week1：仔细阅读python-wechaty项目源码，掌握项目大体框架和可用API；&lt;/li&gt;
+      &lt;li&gt;Week2：收集表情包数据，选择合适的网络模型。&lt;/li&gt;
+      &lt;li&gt;Week3~Week4：训练模型，调试参数；&lt;/li&gt;
+      &lt;li&gt;Week5：开发核心模块，编写单元测试；&lt;/li&gt;
+      &lt;li&gt;Week6：开发、配置表情包插件后端；&lt;/li&gt;
+      &lt;li&gt;Week7~Week8：模块联调，编写测试样例，上线测试。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;项目进度&quot;&gt;项目进度&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;已完成工作：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;利用peewee搭建数据库ORM框架；&lt;/li&gt;
+      &lt;li&gt;表情包爬取（BaseSpider）、收集框架&lt;/li&gt;
+      &lt;li&gt;引入、调试OCR模块&lt;/li&gt;
+      &lt;li&gt;调试Inception特征提取模型&lt;/li&gt;
+      &lt;li&gt;复现&lt;a href=&quot;https://ieeexplore.ieee.org/document/8354191/&quot;&gt;&lt;em&gt;Deep Cosine Metric Learning for Person Re-identification&lt;/em&gt;&lt;/a&gt;一文中有关Metric Learning部分，编写好相关训练、验证、测试模块&lt;/li&gt;
+      &lt;li&gt;表情包导入模块&lt;/li&gt;
+      &lt;li&gt;前端回复模块&lt;/li&gt;
+      &lt;li&gt;后端回复逻辑&lt;/li&gt;
+      &lt;li&gt;前端、后端、Wechaty联调，效果见Demo Live视频中演示&lt;/li&gt;
+      &lt;li&gt;部署文档编写&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;项目申请书&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;时间规划&lt;/code&gt;所提及任务中除训练模型外的任务基本完成；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;遇到的问题及解决方案：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;python-wechaty文档尚未完成，遇到疑惑时需要翻阅issue列表或者深入源码查看；&lt;/li&gt;
+      &lt;li&gt;网络上没有关于将Metric Learning方法应用到表情包分类的先例，不确定Cosine Metric Learning能在表情包特征提取上起到较好效果，不过我认为勇于尝试是十分必要的！&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;后续工作安排：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;对比传统图像分类模型Inception、Metric Learning模型CosineMetricNet的特征提取效果，为用户提供多种选择。&lt;/li&gt;
+      &lt;li&gt;思考出性能优秀的cosine distance比较方法，为从数据库海量表情中提取出相似的表情提供便利。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;中期ppt演示--demo-live-视频链接&quot;&gt;中期PPT演示 &amp;amp; Demo Live 视频链接&lt;/h2&gt;
+
+&lt;p&gt;PPT演示：&lt;/p&gt;
+
+&lt;p&gt;Bilibili: &lt;a href=&quot;https://www.bilibili.com/video/BV1kZ4y1M7F6/&quot;&gt;https://www.bilibili.com/video/BV1kZ4y1M7F6/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Youtube:&lt;/p&gt;
+
+&lt;div class=&quot;video-container&quot; style=&quot;
+    position: relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+&quot;&gt;
+&lt;iframe src=&quot;https://www.youtube.com/embed/JjH5mJ-lRgk&quot; width=&quot;560&quot; height=&quot;315&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot; style=&quot;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;p&gt;Demo Live视频：&lt;/p&gt;
+
+&lt;p&gt;Bilibili: &lt;a href=&quot;https://www.bilibili.com/video/BV17f4y197ut/&quot;&gt;https://www.bilibili.com/video/BV17f4y197ut/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Youtube:&lt;/p&gt;
+&lt;div class=&quot;video-container&quot; style=&quot;
+    position: relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+&quot;&gt;
+&lt;iframe src=&quot;https://www.youtube.com/embed/sjmlpu0TNj4&quot; width=&quot;560&quot; height=&quot;315&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot; style=&quot;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;h3 id=&quot;open-source-reference&quot;&gt;Open-Source Reference&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ouyanghuiyu/chineseocr_lite/tree/master&quot;&gt;chineseocr_lite&lt;/a&gt;: Powerful Chinese OCR module with accurate results and fast inference speed.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/hankcs/HanLP&quot;&gt;HaNLP&lt;/a&gt;: Multilingual NLP library for researchers and companies, built on TensorFlow 2.0.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;academic-citation&quot;&gt;Academic Citation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# in backend/cosine_metric_net.py&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1]N. Wojke and A. Bewley, “Deep Cosine Metric Learning &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Person Re-identification,” &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;2018 IEEE Winter Conference on Applications of Computer Vision &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;WACV&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, Lake Tahoe, NV, Mar. 2018, pp. 748–756, doi: 10.1109/WACV.2018.00087.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;联系我们&quot;&gt;联系我们&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目链接：&lt;a href=&quot;https://github.com/MrZilinXiao/python-wechaty-meme-bot/&quot;&gt;@python-wechaty-meme-bot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;联系方式：me#mrxiao.net  (# -&amp;gt; @)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;导师评审&quot;&gt;导师评审&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;评审内容：&lt;em&gt;中期报告&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;提交人：&lt;em&gt;肖子霖&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;评审结果&quot;&gt;评审结果&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目完成度：&lt;em&gt;《基于Python-Wechaty建立一个斗图机器人》整个项目按照原定方案在实施。在项目实施过程中，以表情包的识别与回复为主线进行推进。项目从前期到中期考核，学生完成了对表情包的爬取、分类以及标注，对表情包的OCR识别，对识别结果的关键字提取，完成情况较好。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;学生参与度：&lt;em&gt;本项目的难点在于对表情包的识别以及回怼表情包，前期对表情包的爬取、分类和标注以及后期训练怼人模型的工作量均比较大。学生在此过程中也是克服困难，积极参与，认真完成项目相关工作。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;代码贡献量：&lt;em&gt;本项目的代码量实际上在于对表情包的处理代码以及模型的训练，也就是代码量实际上都在项目提及的后端平台上，即代码量较好。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;综合评价及建议：&lt;em&gt;总体来说项目完成情况不错，按照既定的规划稳定实施，项目功能模块也在逐步的完成。存在的问题如下：1、项目目前还未涉及到与“怼”相关的功能开发，后期有待完善；2、代码整体风格不是很好，所以看起来比较乱，希望后期能够改善；3、代码关键性地方缺少注释，有待改进。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;最终评审结果：通过&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>MrZilinXiao</name></author><category term="python" /><summary type="html">Author: @MrZilinXiao Always dedicated to learn something brand new. Code: @python-wechaty-meme-bot</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/meme-bot/08-13-wechaty-meme-bot-mid-term.png" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/meme-bot/08-13-wechaty-meme-bot-mid-term.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">传统工业与信息化的结合</title><link href="https://wechaty.js.org/2020/08/11/rcbot/" rel="alternate" type="text/html" title="传统工业与信息化的结合" /><published>2020-08-11T00:00:00+00:00</published><updated>2020-08-11T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/11/rcbot</id><content type="html" xml:base="https://wechaty.js.org/2020/08/11/rcbot/">&lt;blockquote&gt;
+  &lt;p&gt;作者: &lt;a href=&quot;https://github.com/jiucl/&quot;&gt;jiucl&lt;/a&gt;
+项目地址：&lt;a href=&quot;https://github.com/jiucl/rcbot&quot;&gt;rcbot&lt;/a&gt;
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;现状与目标我是谁我要做什么&quot;&gt;现状与目标：我是谁？我要做什么？&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;汽车配件行业&lt;/li&gt;
+  &lt;li&gt;传统工业与信息化的结合&lt;/li&gt;
+  &lt;li&gt;用户无需联系销售或者技术支持，即可快捷地获取产品信息
+    &lt;ul&gt;
+      &lt;li&gt;零延时：无需等待销售或者技术支持回复&lt;/li&gt;
+      &lt;li&gt;信息更准确：不会出现销售或者技术支持回复错误的情况&lt;/li&gt;
+      &lt;li&gt;信息更新：当信息更新时，仅需在服务器上进行数据更新，而无需推送同步到销售或者技术支持&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;公众号的入口过于繁琐，以期以群聊和私聊的方式为用户提供更便捷的服务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;业务我的业务需求&quot;&gt;业务：我的业务需求&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;产品信息查询：根据客户提供的产品编码（国际通用产品编码 OR 自身产品编码），查询产品信息（参数？价格？位置？……）&lt;/li&gt;
+  &lt;li&gt;产品编码查询：根据客户提供的汽车VIN码（文字 OR 图片），查询车辆信息（品牌？车型？排量？……）及适配产品的产品编码，并进一步查询产品信息&lt;/li&gt;
+  &lt;li&gt;未来的其它功能……&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;设计我要如何实现它&quot;&gt;设计：我要如何实现它？&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;前期手动完成的工作
+    &lt;ul&gt;
+      &lt;li&gt;添加用户为好友并拉入群聊&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;机器人
+    &lt;ul&gt;
+      &lt;li&gt;接收消息并检索关键字
+        &lt;ul&gt;
+          &lt;li&gt;如果是文字消息，在消息中检索汽车VIN码或者产品编码&lt;/li&gt;
+          &lt;li&gt;如果是图片消息，进行OCR识别（通过百度AI的API），尝试提取汽车VIN码&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;根据关键字查询信息
+        &lt;ul&gt;
+          &lt;li&gt;如果是产品编码，根据产品编码查询产品信息（由于数据量不大，映射关系保存在本地的JSON文件中）&lt;/li&gt;
+          &lt;li&gt;如果是汽车VIN码，根据VIN码查询车辆信息及适配产品的产品编码（通过网络请求接口），然后根据适配产品的产品编码查询产品信息（本地JSON文件）&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;将查询到的所有车辆信息+产品编码+产品信息发送出去（还可以@用户）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;代码目前的成果&quot;&gt;代码：目前的成果&lt;/h2&gt;
+
+&lt;h3 id=&quot;前期准备&quot;&gt;前期准备&lt;/h3&gt;
+
+&lt;p&gt;先导入所需的库，初始化日志模块&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 导入TS库&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Contact&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Wechaty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;wechaty&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MessageType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ScanStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;wechaty-puppet&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PuppetPadplus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;wechaty-puppet-padplus&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QrcodeTerminal&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;qrcode-terminal&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 导入JS库&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;log4js&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;log4js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 初始化日志库&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;log4js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;appenders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;dateFile&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;log.txt&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;categories&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;appenders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logger&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;log4js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;从本地的json文件中解析产品编码到产品信息的映射&quot;&gt;从本地的JSON文件中解析产品编码到产品信息的映射&lt;/h3&gt;
+
+&lt;p&gt;通过同步方式读取文件&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 读取json文件，解析成映射字典&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;maps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;20200719.json&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;utf-8&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 文件初步示例&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     &quot;D242&quot;: &quot;BFD0001，64mm，北京仓库&quot;,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//     &quot;D302&quot;: &quot;BFD0002，70mm，上海仓库&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;创建机器人实例&quot;&gt;创建机器人实例&lt;/h3&gt;
+
+&lt;p&gt;然后根据文档，创建机器人实例。这里的token和name由开发者自定义&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 固定参数&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;yourtoken&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;rcbot&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 创建机器人实例&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;puppet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PuppetPadplus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// generate xxxx.memory-card.json and save login data for the next login&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Wechaty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;puppet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;编写登录登出回调函数&quot;&gt;编写登录、登出回调函数&lt;/h3&gt;
+
+&lt;p&gt;在账号登录、登出的时候可以调用回调函数，我这里仅仅做了日志记录&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 登录消息处理函数&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onlogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Contact&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`用户：&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;登陆成功`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 登出事件处理函数&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onlogout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Contact&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reason&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`用户：&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;登出成功，登出原因：&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reason&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;核心接收消息的回调函数&quot;&gt;核心：接收消息的回调函数&lt;/h3&gt;
+
+&lt;p&gt;这里是核心部分，即提供业务功能的部分。&lt;/p&gt;
+
+&lt;p&gt;在判断收到的消息为文字消息之后，在消息中检索产品编码，如果检索到，则通过映射查询产品信息，发送出去&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 接收消息处理函数&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onmessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 如果是自己发出去的消息，直接返回&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 如果收到别人发来的消息&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;room&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;room&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 记录日志&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;room&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 如果是群消息&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;topic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;room&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 获取群名称&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`在群&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;中，收到由&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;发来的消息&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;：&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`);
+    } else if (to){    // 如果不是群消息
+        logger.info(`&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;私聊消息&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;，&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;收到由$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;发来的消息&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;：&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`);
+    }
+    // 判断消息类型
+    if(msg.type() === Message.Type.Text){   // 如果是文字消息
+        let msgu = msg.text().toUpperCase();
+        let keyhit = '';
+        for (let key in maps) {
+            if (maps.hasOwnProperty(key)) {
+                if (msgu.includes(key)) {   // 如果匹配到key
+                    // 如果该key以S或者D开头，且包含BF，则代表匹配上，则比较长度
+                    if (((key[0] === 'B') || (!msgu.includes(`&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BF$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`))) &amp;amp;&amp;amp; (keyhit.length &amp;lt; key.length))
+                        keyhit = key;
+                }
+            }
+        }
+        if(keyhit !== ''){
+            await sleep(1000);   // 休眠1S
+            logger.info(`&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;回复消息&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;：&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;maps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;keyhit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`);
+            await msg.say(maps[keyhit]);   // 回复消息
+        }
+    }
+}
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;注册回调函数&quot;&gt;注册回调函数&lt;/h3&gt;
+
+&lt;p&gt;在回调函数写完之后，将回调函数注册到事件&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 注册处理函数&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 扫描消息处理函数直接内置处理，因为存在类型指定问题&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrcode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ScanStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Waiting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;QrcodeTerminal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;generate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrcode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;small&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onlogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onmessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;logout&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onlogout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;根据目前的设计未完成的功能&quot;&gt;根据目前的设计，未完成的功能&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;图片OCR识别：接收图片消息，进行OCR识别（通过百度AI的API），尝试提取汽车VIN码&lt;/li&gt;
+  &lt;li&gt;根据汽车VIN码查询车辆信息及适配产品的产品编码（通过网络请求接口）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;计划未来的需求与开发计划&quot;&gt;计划：未来的需求与开发计划&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;模块化
+    &lt;ul&gt;
+      &lt;li&gt;拆分业务代码为多个模块，方便后期维护&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;代码性能优化：目前的检索算法效率较低，需要进行优化&lt;/li&gt;
+  &lt;li&gt;功能
+    &lt;ul&gt;
+      &lt;li&gt;分群分业务：根据不同的群，提供不同的业务、信息或者数据&lt;/li&gt;
+      &lt;li&gt;本地训练模型，进行OCR识别&lt;/li&gt;
+      &lt;li&gt;未来的其它功能……&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;致谢&quot;&gt;致谢&lt;/h2&gt;
+
+&lt;p&gt;感谢 &lt;a href=&quot;https://wechaty.js.org/&quot;&gt;Wechaty&lt;/a&gt; 提供的微信机器人SDK&lt;/p&gt;
+
+&lt;p&gt;感谢 &lt;a href=&quot;https://www.juzibot.com/&quot;&gt;句子互动&lt;/a&gt; 提供的ipad协议版token&lt;/p&gt;</content><author><name>jiucl</name></author><category term="project" /><category term="wechaty" /><category term="bot" /><category term="car" /><summary type="html">作者: jiucl 项目地址：rcbot</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/rcbot/rcbot.jpg" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/rcbot/rcbot.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Chatbots二重奏：用wechaty-log-monitor插件实现「掉线给码」等DevOps</title><link href="https://wechaty.js.org/2020/08/09/wechaty-log-monitor/" rel="alternate" type="text/html" title="Chatbots二重奏：用wechaty-log-monitor插件实现「掉线给码」等DevOps" /><published>2020-08-09T00:00:00+00:00</published><updated>2020-08-09T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/09/wechaty-log-monitor</id><content type="html" xml:base="https://wechaty.js.org/2020/08/09/wechaty-log-monitor/">&lt;blockquote&gt;
+  &lt;p&gt;作者: &lt;a href=&quot;https://github.com/archywillhe/&quot;&gt;Archy Will He 何魏奇&lt;/a&gt;，functional programmer, interested in computational semantics，目前在全职做&lt;a href=&quot;https://archy.sh&quot;&gt;吖奇说(ARCHY.SH)&lt;/a&gt;这个项目。Working with GPT-2 (and hopefully with 3 soon!)&lt;/p&gt;
+
+  &lt;p&gt;Github Repo: &lt;a href=&quot;https://github.com/archywillhe/wechaty-log-monitor&quot;&gt;wechaty-log-monitor plugin&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/users/2041954/%E5%90%96%E5%A5%87%E8%AF%B4-%E4%BD%95%E9%AD%8F%E5%A5%87archy-will-he&quot;&gt;&lt;img src=&quot;https://camo.githubusercontent.com/c551a231a6cda28e59291fa091ddcb7b9899f6ec/68747470733a2f2f737461636b65786368616e67652e636f6d2f75736572732f666c6169722f313334303435332e706e67&quot; alt=&quot;flair&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;最近基于Wechaty&lt;a href=&quot;https://mp.weixin.qq.com/s/FcgaOOnZNPUuMSihmMs_lw&quot;&gt;做的一个学中文小助手ARCHY开始营业了&lt;/a&gt;🤖🤖🍜～&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-log-monitor/archy-demo.gif&quot; alt=&quot;gif-demo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了能让小助手可以有更棒的 readily availability，我写了这个&lt;a href=&quot;https://github.com/archywillhe/wechaty-log-monitor&quot;&gt;wechaty-log-monitor插件&lt;/a&gt;来给在production跑的Wechaty做日志相关的devops。这是一个建立于两个chatbots的二重奏。&lt;/p&gt;
+
+&lt;p&gt;目前插件的主要功能是「掉线给码」：一个Wechaty掉线了，另一个Wechaty会发QR码给这个Wechaty的微信号来重新登陆。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-log-monitor/demo2.jpeg&quot; alt=&quot;qr-rescue&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样掉线了就不用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh&lt;/code&gt;到production服务器，然后&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo su git&lt;/code&gt;+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pm2 logs --lines 100&lt;/code&gt;来进行扫码重登了。&lt;/p&gt;
+
+&lt;p&gt;现在不管在吃饭、野外、还是地铁上，掉线了便可立马扫码重登。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-log-monitor/thumbup.jpeg&quot; alt=&quot;thumbup&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;一如何掉线给码&quot;&gt;一、如何「掉线给码」&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn add wechaty-log-monitor@latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;只要在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;botAlice&lt;/code&gt;里去给&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;botBob&lt;/code&gt;来&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;createQRRescueOperation&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrResuce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;wechaty-log-monitor&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrResuceForB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrResuce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;logFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../botBob.log&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;BobWeixin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loginTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;您好世界&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;botAlice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;WechatyLogMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;enableSelfToBeQrRescued&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;logOperations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrResuceForB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;也在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;botBob&lt;/code&gt;里给&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;botAlice&lt;/code&gt;做vice versa的事儿:&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrResuce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;wechaty-log-monitor&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrResuceForA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrResuce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;logFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;../botAlice.log&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;AliceWeixin&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loginTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;#ping&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;botBob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;WechatyLogMonitor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;enableSelfToBeQrRescued&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;logOperations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qrResuceForA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;就几行代码，就能更轻松地进行掉线重登的developer operation了。 提高readily availability：只要两个没有同时掉线，另一个就能迅速得救！&lt;/p&gt;
+
+&lt;p&gt;p.s. 掉线后，bot发一个二维码就不会再发给你了。如果你想要最新的登陆二维码，发「qr」给bot就行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-log-monitor/qr.jpeg&quot; alt=&quot;qr&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;二wechatylogmonitor的内部&quot;&gt;二、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogMonitor&lt;/code&gt;的内部&lt;/h2&gt;
+
+&lt;p&gt;wechaty-log-monitor里面所有东西都是函数式的。而且非常松耦合。除了IO中难以避免的副作用(side effect)，大致上是完全pure的。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogMonitor&lt;/code&gt;这个函数里主要就是定义了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startWatchingLog&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startReactingToCmds&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startWatchingLog&lt;/code&gt;是用来做&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs.watchFile&lt;/code&gt;+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs.createReadStream&lt;/code&gt;的回调（实现在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;watchAndStream&lt;/code&gt;里），而&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startReactingToCmds&lt;/code&gt;则是来做Wechaty的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;message event&lt;/code&gt;的回调。&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;startWatchingLog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Wechaty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logOperations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;WechatyLogOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nx&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;each&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logOperations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;WechatyLogOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onLogFileIsChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;operation&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onLogFileIsChanged&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;watchAndStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;nx&quot;&gt;onLogFileIsChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;watchAndStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existsSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`file-to-watch &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; not exist`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;watchFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;interval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;curr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createReadStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;curr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;参数&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onLogFileIsChanged&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config&lt;/code&gt;都来源于type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogOperation&lt;/code&gt;的object。而之前用到的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qrResuce&lt;/code&gt;其实就是return了这个type的一个object。&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrRescue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;loginTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;WechatyLogOperation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startReactingToCmds&lt;/code&gt;和👆上面的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startWatchingLog&lt;/code&gt;差不多，不言而喻也。&lt;/p&gt;
+
+&lt;h2 id=&quot;三掉线给码的实现&quot;&gt;三、「掉线给码」的实现&lt;/h2&gt;
+
+&lt;p&gt;函数&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;startWatchingLog&lt;/code&gt;里调用到的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onLogFileIsChanged&lt;/code&gt;取决于&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogOperation&lt;/code&gt;的object对它的定义。&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;onLogFileIsChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogFileLambda&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;onCmdReceived&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyCommandLambda&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其实&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qrResuce&lt;/code&gt;就是运用了一个global state&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;isOtherBotAlive:boolean&lt;/code&gt;加一些regex来根据写进日志的字符串从而来变动&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;isOtherBotAlive&lt;/code&gt;这个“开关”，而这个“开关”的变动又会调用到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onOtherBotIsLoggedOut&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onOtherBotIsLoggedIn&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onLogFileIsChanged&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Wechaty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newLogs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;globalState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isDisabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;globalState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isOtherBotAlive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;latestQRCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrCodeAwaitingToBeScanned&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newLogs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;latestQRCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onOtherBotIsLoggedOut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;latestQRCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;loggedIn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isUserLoggedIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;newLogs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loggedIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;onOtherBotIsLoggedIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;qrCodeAwaitingToBeScanned&lt;/code&gt;里的regex主要是来查找“INFO StarterBot…”和“INFO StarterBot onScan…”这两个string。(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogMonitor&lt;/code&gt;的参数&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enableSelfToBeQrRescued: true&lt;/code&gt;将会让Wechaty在登陆和要扫码时给出对应这两个string的log，写入log file里。)&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qrCodeAwaitingToBeScanned&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lastFewLines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;signThatItIsLoggedIn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/INFO StarterBot Contact&amp;lt;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)?&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;&amp;gt; login/g&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;indexOfLastSignOfLoggedIn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getLastMatch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;signThatItIsLoggedIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lastFewLines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)?.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/INFO StarterBot onScan: Waiting&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; - &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)?\n&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/g&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getLastMatch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lastFewLines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;indexOfLastSignOfLoggedIn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;四定义其他wechatylogoperation&quot;&gt;四、定义其他WechatyLogOperation&lt;/h2&gt;
+
+&lt;p&gt;总的来说，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogMonitor&lt;/code&gt; 把「看log回调」和「bot收到信息回调」这两件事abstract走了，所以在你的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogOperation&lt;/code&gt;中，只要选择性地定义 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onLogFileIsChanged&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onCmdReceived&lt;/code&gt;就可以了。&lt;/p&gt;
+
+&lt;p&gt;比如要写一个来restart PM2的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogOperation&lt;/code&gt;函数闭包，几行就行：&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;restartPM2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;pm2Id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}):&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;WechatyLogOperation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;onCmdReceived&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Wechaty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cmd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;execAndPipeToBot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;pm2 restart &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pm2Id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-log-monitor/restart.jpeg&quot; alt=&quot;restart&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;五待开发的authgtp3功能&quot;&gt;五、待开发的Auth、GTP3功能&lt;/h2&gt;
+
+&lt;p&gt;目前 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WechatyLogOperationConfig&lt;/code&gt; 里有一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;securityRule&lt;/code&gt;值，默认是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;None&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;logFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;adminWeixin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;securityRule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationSecurityRule&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WechatyLogOperationSecurityRule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;None&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;SMSVerification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//not implemented&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;authy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//not implemented&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;googleAuth&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//not implemented&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;未来如果要发展到把项目整个production相关的DevOps（不单只是WeChaty相关的Operations，如在production跑的MongoDB相关的Operations、Restful API服务器相关的Operations等）都运用WeChaty来给团队塑造一个简单、容易上手的流程，也就是把chatbot变成了一个简易的terminal，那时候我们可以设定让更危险的Operations变得需要短信验证码、authy等方式去做Authentication。&lt;/p&gt;
+
+&lt;p&gt;我相信Auth功能对于wechaty-log-monitor插件来说将会是一个有意思的发展方向之一。&lt;/p&gt;
+
+&lt;p&gt;若pragmatically，『chatbot变成一个更简易的terminal』这件事真的行得通，那另一个非常有意思的发展方向就是结合&lt;a href=&quot;https://beta.openai.com/?app=productivity&amp;amp;example=4_2_0&quot;&gt;OpenAI最近提及到GPT3的一个很有意思的应用：Natural Language Shell&lt;/a&gt; - 运用自然语言去做执行unix等命令。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-log-monitor/gtp3.jpeg&quot; alt=&quot;gtp3&quot; /&gt;&lt;/p&gt;</content><author><name>Archy Will He 何魏奇</name></author><category term="project" /><category term="plugin" /><category term="wechaty" /><category term="devops" /><category term="featured" /><summary type="html">为了能让（营业中的）小助手可以有更棒的 readily availability，我写了这个wechaty-log-monitor插件来给在production跑的Wechaty做日志相关的devops。</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/wechaty-log-monitor/demo.jpeg" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/wechaty-log-monitor/demo.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Wechaty Contributor Meetup – Shenzhen August 5</title><link href="https://wechaty.js.org/2020/08/09/wechaty-shenzhen-meetup/" rel="alternate" type="text/html" title="Wechaty Contributor Meetup – Shenzhen August 5" /><published>2020-08-09T00:00:00+00:00</published><updated>2020-08-09T00:00:00+00:00</updated><id>https://wechaty.js.org/2020/08/09/wechaty-shenzhen-meetup</id><content type="html" xml:base="https://wechaty.js.org/2020/08/09/wechaty-shenzhen-meetup/">&lt;blockquote&gt;
+  &lt;p&gt;Author: &lt;a href=&quot;https://github.com/dchaofei&quot;&gt;@dchaofei&lt;/a&gt; The author of go-wechaty&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Wechaty 贡献者深圳聚餐&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-shenzhen-meetup/wechaty-shenzhen-meetup.jpg&quot; alt=&quot;Photo&quot; /&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;8 月 5 日，周五晚上，大家按照约定时间到达吃饭地点，我与@lijiarui、@Gcaufy没有线下见过面，有一种见网友的感觉。好在很快就熟悉了。
+对于我来说意义非凡，非常荣幸，第一次接触 star 数那么多的项目作者，而且还是两位，好似追星族见了明星的感觉。&lt;/p&gt;
+
+&lt;p&gt;大概内容：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;我是如何参与开发 go-wechaty 的，去年 2019 年逛 github 看到 wechaty，感到很有趣，想写一个群聊机器人，但是看到要用 ts, 要写
+一个机器人还要先学一下 ts, 我当时在学 go 语言，索性写一个 go 版本的，扒拉一下源码，申请了一个 padplus 的 token,就开工了，写了
+一个裸的 go 版本的 padplus-puppet，实现了登录，发消息，然后就没下文了。今年 2020 年再逛 github, 发现 wechaty 要多语言了，刚好
+有 go 的，就参与了开发 go-wechaty, 开发完后还用 go-wechaty 写了一个打卡提醒的机器人，这次是真的写了机器人了~~~。&lt;/li&gt;
+  &lt;li&gt;问了一些 @Gcaufy 是怎么开发 wepy 的，是因为自己要用，所以就写了，然后就开源了，最后就这么火爆，好 cool。&lt;/li&gt;
+  &lt;li&gt;@Gcaufy 和 @lijiarui 还讨论了旅游相关的，让我好生羡慕。&lt;/li&gt;
+  &lt;li&gt;还聊了很多，也有很多以我现在的知识听不懂的，具体记不太清了…&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/wechaty-shenzhen-meetup/book.jpg&quot; alt=&quot;Photo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;感谢@lijiarui赠送亲笔签名书和 wechaty 贴纸,感谢@Gcaufy晚餐，期待下次再聚。&lt;/p&gt;
+
+&lt;p&gt;参与者介绍:
+&lt;a href=&quot;https://github.com/lijiarui&quot;&gt;@lijiarui&lt;/a&gt;: Full stack developer, serial entrepreneur, Founder &amp;amp; CEO of JuziBot&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gcaufy&quot;&gt;@Gcaufy&lt;/a&gt;: Author of WePY, a mini program fframework for Wechat. Tencent Engineer&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dchaofei&quot;&gt;@dchaofei&lt;/a&gt;: Go/PHP Developer, the author of go-wechaty&lt;/p&gt;</content><author><name>丁超飞</name></author><category term="event" /><category term="meetup" /><summary type="html">Author: @dchaofei The author of go-wechaty</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://wechaty.js.org/assets/2020/wechaty-shenzhen-meetup/wechaty-shenzhen-meetup.jpg" /><media:content medium="image" url="https://wechaty.js.org/assets/2020/wechaty-shenzhen-meetup/wechaty-shenzhen-meetup.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
